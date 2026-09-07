@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Timecomp</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="index.js" defer></script>
+</head>
+<body>
+	<main>
+		<h1>Timecomp</h1>
+        <section id="registration">
+            <h2>Registrer deg</h2>
+            <form id="registrationForm">
+                <label for="name">Navn:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="mobile">Mobilnummer:</label>
+                <input type="tel" id="mobile" name="mobile" required>
+                <button type="submit">Registrer</button>
+            </form>
+        </section>
+
+        <section id="competition">
+            <div id="countdown">
+                <h2>Tid</h2>
+                <button id="startButton">Start</button>
+                <p id="timer">0</p>
+                <button id="stopButton" disabled>Stopp</button>
+            </div>
+        </section>
+
+        <section id="result">
+            <div>
+                <h2>Resultat</h2>
+                <p id="resultText"></p>
+            </div>
+
+        </section>
+
+        <section id="highscore">
+            <h2>Highscore</h2>
+            <ul id="highscoreList">
+
+            </ul>
+        </section>
+	</main>
+</body>
+</html>
+    
