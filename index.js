@@ -1,76 +1,36 @@
 
+import * as functions from './functions.js';
 
-registrationForm = document.getElementById('registrationForm');
+let startTime;
+let intervalId;
+let currentParticipant = null;
+
+const registrationForm = document.getElementById('registrationForm');
 registrationForm.addEventListener('submit', function (event) {
     event.preventDefault();
     const name = document.getElementById('name').value;
-    const mobile = document.getElementById('mobile').value;
-
-    newParticipant(name, mobile);
+    const phone = document.getElementById('phone').value;
+    newParticipant(name, phone);
 });
 
-startButton = document.getElementById('startButton');
-stopButton = document.getElementById('stopButton');
+const participantNameDisplay = document.getElementById('participantName');
+const timerDisplay = document.getElementById('timer');
 
-function showSection(sectionId) {
-    // Show the selected section
-    const selectedSection = document.getElementById(sectionId);
-    if (selectedSection) {
-        selectedSection.hidden = false;
+const startStopButton = document.getElementById('startStopButton');
+startStopButton.addEventListener('click', function () {
+    if (startStopButton.textContent === 'Start') {
+        startTimer();
+    } else {
+        stopTimer();
     }
-}
-
-function hideSection(sectionId) {
-    // Hide the selected section
-    const selectedSection = document.getElementById(sectionId);
-    if (selectedSection) {
-        selectedSection.hidden = true;
-    }
-}
-
-function saveData(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
-}
-
-function loadData(key) {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
-}
-
-function clearData(key) {
-    localStorage.removeItem(key);
-}
-
-function addParticipant(name, phone, time) {
-    const participants = loadData('participants') || [];
-    participants.push({ name,
-        phone,
-        time,
-        created: new Date().toISOString() });
-    saveData('participants', participants);
-}
-
-function getParticipants() {
-    return loadData('participants') || [];
-}
-
-function clearParticipants() {
-    clearData('participants');
-}
+});
 
 function getHighscores() {
-    return getParticipants().sort((a, b) => a.time - b.time).slice(0, 10);
-}
-
-function drawRandomWinner() {
-    const participants = getParticipants();
-    if (participants.length === 0) return null;
-    const randomIndex = Math.floor(Math.random() * participants.length);
-    return participants[randomIndex];
+    return functions.getParticipants().sort((a, b) => a.time - b.time).slice(0, 10);
 }
 
 function getBestTime() {
-    const participants = getParticipants();
+    const participants = functions.getParticipants();
     if (participants.length === 0) return null;
     return participants.reduce((best, participant) => {
         return participant.time < best.time ? participant : best;
@@ -79,7 +39,7 @@ function getBestTime() {
 
 function updateHighscoreList() {
     const highscoreList = document.getElementById('highscoreList');
-    if (!highscoreList) return; 
+    if (!highscoreList) return;
     highscoreList.innerHTML = '';
     getHighscores().forEach(participant => {
         const li = document.createElement('li');
@@ -95,31 +55,55 @@ function updateResultText(text) {
     }
 }
 
-//Denne må fikses. FLytte logikk ut av denne funksjonen. og globalt kanskje.
+function startTimer() {
+    startTime = Date.now();
+    intervalId = setInterval(updateTimer, 100);
+    document.getElementById('startStopButton').textContent = 'Stopp';
+}
 
-function newParticipant(name, mobile) {
-    let startTime;
-    let intervalId;
+function updateTimer() {
+    const elapsedTime = (Date.now() - startTime) / 1000;
+    timerDisplay.textContent = `${elapsedTime.toFixed(2)} sekunder`;
+}
 
-    function startTimer() {
-        startTime = Date.now();
-        intervalId = setInterval(updateTimer, 100);
-        document.getElementById('startButton').disabled = true;
-        document.getElementById('stopButton').disabled = false;
+function stopTimer() {
+    timerDisplay.textContent = '0 sekunder';
+    functions.showSection('result');
+    clearInterval(intervalId);
+    const elapsedTime = (Date.now() - startTime) / 1000;
+    functions.addParticipant(currentParticipant.name, currentParticipant.phone, elapsedTime);
+    const allTimes = functions.getAllTimes();
+    const position = allTimes.findIndex(p => p.name === currentParticipant?.name && p.phone === currentParticipant?.phone) + 1;
+    updateResultText(`Ditt resultat: ${elapsedTime} sekunder. Du er på ${position}. plass!`);
+    startStopButton.textContent = 'Start';
+    startStopButton.hidden = true;
+    setTimeout(initPage, 5000);
+    // functions.hideSection('competition');
+}
+
+function newParticipant(name, phone) {
+    if (!name || !phone) {
+        alert('Vennligst fyll inn både navn og mobilnummer.');
+        return;
     }
-
-    function stopTimer() {
-        clearInterval(intervalId);
-        const elapsedTime = (Date.now() - startTime) / 1000;
-        addParticipant(name, mobile, elapsedTime);
-        updateHighscoreList();
-        updateResultText(`Ditt resultat: ${elapsedTime} sekunder`);
-        document.getElementById('startButton').disabled = false;
-        document.getElementById('stopButton').disabled = true;
-    }
+    timerDisplay.textContent = '0 sekunder';
+    functions.hideSection('registration');
+    functions.hideSection('highscore');
+    currentParticipant = { name, phone };
+    registrationForm.reset();
+    participantNameDisplay.textContent = `Deltager: ${name}`;
+    functions.showSection('competition');
+    startStopButton.textContent = 'Start';
+    startStopButton.hidden = false;
+}
 
 function initPage() {
-    showSection('registration');
-    showSection('highscore');
+    functions.hideSection('competition');
+    functions.hideSection('result');
+    functions.showSection('registration');
+    functions.showSection('highscore');
+    updateResultText('');
+    updateHighscoreList();
 }
-    
+
+initPage();
