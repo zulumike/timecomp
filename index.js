@@ -29,14 +29,6 @@ function getHighscores() {
     return functions.getParticipants().sort((a, b) => a.time - b.time).slice(0, 10);
 }
 
-function getBestTime() {
-    const participants = functions.getParticipants();
-    if (participants.length === 0) return null;
-    return participants.reduce((best, participant) => {
-        return participant.time < best.time ? participant : best;
-    }, participants[0]);
-}
-
 function updateHighscoreList() {
     const highscoreList = document.getElementById('highscoreList');
     if (!highscoreList) return;
@@ -44,7 +36,7 @@ function updateHighscoreList() {
     let position = 1;
     getHighscores().forEach(participant => {
         const li = document.createElement('li');
-        li.textContent = `${position}. ${participant.name}: ${participant.time}`;
+        li.textContent = `${participant.name}: ${participant.time}`;
         highscoreList.appendChild(li);
         position++;
     });
