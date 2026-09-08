@@ -88,7 +88,6 @@ function stopTimer() {
     startStopButton.textContent = 'Start';
     startStopButton.hidden = true;
     setTimeout(initPage, 5000);
-    // functions.hideSection('competition');
 }
 
 function checkDuplicateParticipant(phone) {
@@ -128,6 +127,7 @@ function newParticipant(name, phone) {
 function initPage() {
     functions.hideSection('competition');
     functions.hideSection('result');
+    functions.showSection('info');
     functions.showSection('start-screen');
     document.getElementById('name').focus();
     updateResultText('');

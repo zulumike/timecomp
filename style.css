@@ -34,7 +34,7 @@ button {
 }
 
 .header {
-    margin-top: 10px;
+    margin: 5em 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +48,7 @@ button {
 
 .info {
     text-align: center;
-    margin: 20px 0;
+    margin-bottom: 3em;
 }
 
 #start-screen {
