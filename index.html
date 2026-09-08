@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Tlf-nummer:</label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <input type="tel" id="phone" name="phone" required pattern="[0-9]{8}" maxlength="8" placeholder="8 siffer">
                     </div>
                     <p>Alle data blir slettet ved konkurranseslutt</p>
                     <button type="submit">Registrer</button>
@@ -39,6 +39,7 @@
                 <h2>Highscore</h2>
                 <ol id="highscoreList">
                 </ol>
+                <p id="participantCount"></p>
             </section>
         </section>
 

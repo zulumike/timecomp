@@ -25,6 +25,8 @@ startStopButton.addEventListener('click', function () {
     }
 });
 
+const participantCount = document.getElementById('participantCount');
+
 function getHighscores() {
     return functions.getParticipants().sort((a, b) => a.time - b.time).slice(0, 10);
 }
@@ -39,9 +41,7 @@ function updateHighscoreList() {
         highscoreList.appendChild(li);
     });
     const totalParticipants = functions.getParticipants().length;
-    const totalParticipantsP = document.createElement('p');
-    totalParticipantsP.textContent = 'Totalt antall deltakere: ' + totalParticipants;
-    document.getElementById('highscore').appendChild(totalParticipantsP);
+    participantCount.textContent = 'Totalt antall deltakere: ' + totalParticipants;
 }
 
 function updateResultText(text) {
