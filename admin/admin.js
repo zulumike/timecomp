@@ -56,7 +56,7 @@ resetButton.addEventListener('click', () => {
     updateAllTimesList();
 });
 
-if (prompt('Skriv inn admin-passordet:') === '1989') {
+if (prompt('Skriv inn admin-passordet:') === functions.adminCode) {
     updateAllTimesList();
 }
 else {

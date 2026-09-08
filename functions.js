@@ -1,3 +1,5 @@
+export const adminCode = '1989';
+
 export function showSection(sectionId) {
     // Show the selected section
     const selectedSection = document.getElementById(sectionId);
