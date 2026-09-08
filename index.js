@@ -110,6 +110,10 @@ function newParticipant(name, phone) {
             event.preventDefault();
             startTimer();
         }
+        if (event.code === 'Escape') {
+            event.preventDefault();
+            initPage();
+        }
     },
     { once: true });
 }
