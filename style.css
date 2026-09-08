@@ -49,8 +49,16 @@ button {
 
 .info {
     text-align: center;
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
     font-size: 1.5em;
+}
+
+.info h1 {
+    margin-bottom: 0.5em;
+}
+
+.info p {
+    margin: 0.3em;
 }
 
 #start-screen {
@@ -100,6 +108,7 @@ button {
     flex-direction: column;
     align-items: center;
     width: 50%;
+    font-size: 2em;
 }
 
 #highscore h2 {
@@ -131,10 +140,6 @@ button {
 }
 
 #result p {
-    font-size: 2em;
-}
-
-#highscore {
     font-size: 2em;
 }
 
