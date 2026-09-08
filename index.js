@@ -33,12 +33,10 @@ function updateHighscoreList() {
     const highscoreList = document.getElementById('highscoreList');
     if (!highscoreList) return;
     highscoreList.innerHTML = '';
-    let position = 1;
     getHighscores().forEach(participant => {
         const li = document.createElement('li');
         li.textContent = `${participant.name}: ${participant.time}`;
         highscoreList.appendChild(li);
-        position++;
     });
 }
 
