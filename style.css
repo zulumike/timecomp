@@ -67,6 +67,32 @@ button {
     width: 50%;
 }
 
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+    /* width: 100%; */
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+.form-group input {
+    margin-left: auto;
+    padding: 0.5em;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--mifo-light);
+    flex: 1;
+}
+
+.form-group label {
+    margin-right: 1em;
+}
+
+/* #registrationForm label {
+    font-size: 1.5em;
+} */
+
 #highscore {
     margin: 5px;
     display: flex;
