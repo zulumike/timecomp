@@ -86,7 +86,12 @@ function stopTimer() {
 
 function checkDuplicateParticipant(phone) {
     const participants = functions.getParticipants();
-    return participants.some(participant => participant.phone === phone);
+    const count = participants.filter( p => p.phone === phone).length;
+    if (count > 1) {
+        return true;
+    }
+    else return false;
+
 }
 
 function newParticipant(name, phone) {
@@ -95,7 +100,7 @@ function newParticipant(name, phone) {
         return;
     }
     if (checkDuplicateParticipant(phone)) {
-        alert('Denne deltakeren er allerede registrert.');
+        alert('Denne deltakeren er allerede registrert 2 ganger.');
         return;
     }
     timerDisplay.textContent = '0 sekunder';
