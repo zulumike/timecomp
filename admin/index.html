@@ -6,20 +6,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
     <title>Admin</title>
 </head>
 <body>
     <main>
         <section id="admin">
             <h2>Admin Panel</h2>
-            <a href="../index.html">Tilbake til konkurranse</a>
-            <br>
-            <br>
-            <button id="drawWinnerButton">Trekk vinner</button>
-            <button id="resetButton">Nullstill konkurranse</button>
-            <div id="winnerResult"></div>
-            <h3>Alle tider</h3>
-            <ul id="allTimesList"></ul>
+            <div>
+                <button id="toCompetition">Tilbake til konkurranse</button>
+                <button id="drawWinnerButton">Trekk vinner</button>
+                <button id="editButton">Vis deltakere</button>
+                <button id="resetButton">Nullstill konkurranse</button>
+            </div>
+            <section id="winnerDisplay"></section>
+            <section id="allTimes">
+                <h3>Alle tider</h3>
+                <ul id="allTimesList"></ul>
+            </section>
         </section>
     </main>
 

@@ -138,6 +138,13 @@ button {
     font-size: 2em;
 }
 
+#admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
 #admin-link {
     position: absolute;
     bottom: 10px;
@@ -150,4 +157,16 @@ button {
     color: var(--mifo-light);
     text-decoration: none;
     font-size: 2em;
+}
+
+#winnerDisplay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 50px;
+    height: 100%
+    /* width: 80%; */
 }
