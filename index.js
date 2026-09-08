@@ -38,6 +38,10 @@ function updateHighscoreList() {
         li.textContent = `${participant.name}: ${participant.time}`;
         highscoreList.appendChild(li);
     });
+    const totalParticipants = functions.getParticipants().length;
+    const totalParticipantsP = document.createElement('p');
+    totalParticipantsP.textContent = 'Totalt antall deltakere: ' + totalParticipants;
+    document.getElementById('highscore').appendChild(totalParticipantsP);
 }
 
 function updateResultText(text) {
