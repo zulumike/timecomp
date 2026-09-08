@@ -41,10 +41,12 @@ function updateHighscoreList() {
     const highscoreList = document.getElementById('highscoreList');
     if (!highscoreList) return;
     highscoreList.innerHTML = '';
+    let position = 1;
     getHighscores().forEach(participant => {
         const li = document.createElement('li');
-        li.textContent = `${participant.name}: ${participant.time}`;
+        li.textContent = `${position}. ${participant.name}: ${participant.time}`;
         highscoreList.appendChild(li);
+        position++;
     });
 }
 
@@ -59,6 +61,14 @@ function startTimer() {
     startTime = Date.now();
     intervalId = setInterval(updateTimer, 100);
     document.getElementById('startStopButton').textContent = 'Stopp';
+    document.addEventListener('keydown', (event) => {
+        if (event.repeat) return; // Ignore repeated events
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            stopTimer();
+        }
+    },
+    { once: true });
 }
 
 function updateTimer() {
@@ -67,7 +77,7 @@ function updateTimer() {
 }
 
 function stopTimer() {
-    timerDisplay.textContent = '0 sekunder';
+    timerDisplay.textContent = '';
     functions.showSection('result');
     clearInterval(intervalId);
     const elapsedTime = (Date.now() - startTime) / 1000;
@@ -81,27 +91,45 @@ function stopTimer() {
     // functions.hideSection('competition');
 }
 
+function checkDuplicateParticipant(phone) {
+    const participants = functions.getParticipants();
+    return participants.some(participant => participant.phone === phone);
+}
+
 function newParticipant(name, phone) {
     if (!name || !phone) {
         alert('Vennligst fyll inn både navn og mobilnummer.');
         return;
     }
+    if (checkDuplicateParticipant(phone)) {
+        alert('Denne deltakeren er allerede registrert.');
+        return;
+    }
     timerDisplay.textContent = '0 sekunder';
-    functions.hideSection('registration');
-    functions.hideSection('highscore');
+    functions.hideSection('start-screen');
+    functions.hideSection('info');
     currentParticipant = { name, phone };
     registrationForm.reset();
     participantNameDisplay.textContent = `Deltager: ${name}`;
     functions.showSection('competition');
     startStopButton.textContent = 'Start';
     startStopButton.hidden = false;
+    startStopButton.focus();
+    document.addEventListener('keydown', (event) => {
+        if (event.repeat) return; // Ignore repeated events
+        if (event.code === 'Space' || event.code === 'Enter') {
+            event.preventDefault();
+            startTimer();
+        }
+    },
+    { once: true });
 }
 
 function initPage() {
     functions.hideSection('competition');
     functions.hideSection('result');
-    functions.showSection('registration');
-    functions.showSection('highscore');
+    functions.showSection('start-screen');
+    document.getElementById('name').focus();
     updateResultText('');
     updateHighscoreList();
 }

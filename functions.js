@@ -3,6 +3,7 @@ export function showSection(sectionId) {
     const selectedSection = document.getElementById(sectionId);
     if (selectedSection) {
         selectedSection.hidden = false;
+        selectedSection.classList.remove('hidden');
     }
 }
 
@@ -11,6 +12,7 @@ export function hideSection(sectionId) {
     const selectedSection = document.getElementById(sectionId);
     if (selectedSection) {
         selectedSection.hidden = true;
+        selectedSection.classList.add('hidden');
     }
 }
 

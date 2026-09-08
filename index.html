@@ -4,21 +4,37 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Timecomp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 	<script type="module" src="index.js"></script>
 </head>
 <body>
 	<main>
-		<h1>Timecomp</h1>
-        <section id="registration">
-            <h2>Registrer deg</h2>
-            <form id="registrationForm">
-                <label for="name">Navn:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="phone">Telefonnummer:</label>
-                <input type="tel" id="phone" name="phone" required>
-                <button type="submit">Registrer</button>
-            </form>
+        <section class="header">
+            <img src="assets/Logo_Lys.png" alt="Timecomp logo" class="logo">
+        </section>
+        <section id="info" class="info">
+            <h1>Velkommen til MIFO konkurranse</h1>
+            <p>Registrer deg for å delta og se om du kan slå rekorden!</p>
+        </section>
+        <section id="start-screen">
+            <section id="registration">
+                <h2>Registrer deg</h2>
+                <form id="registrationForm">
+                    <label for="name">Navn:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="phone">Telefonnummer:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    <button type="submit">Registrer</button>
+                </form>
+            </section>
+            <section id="highscore">
+                <h2>Highscore</h2>
+                <ul id="highscoreList">
+                </ul>
+            </section>
         </section>
 
         <section id="competition">
@@ -36,12 +52,8 @@
             </div>
 
         </section>
-
-        <section id="highscore">
-            <h2>Highscore</h2>
-            <ul id="highscoreList">
-
-            </ul>
+        <section id="admin-link">
+            <a href="admin/index.html">⚙</a>
         </section>
 	</main>
 </body>

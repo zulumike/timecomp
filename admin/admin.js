@@ -56,4 +56,10 @@ resetButton.addEventListener('click', () => {
     updateAllTimesList();
 });
 
-updateAllTimesList();
+if (prompt('Skriv inn admin-passordet:') === '1989') {
+    updateAllTimesList();
+}
+else {
+    alert('Feil passord. Du har ikke tilgang til admin-siden.');
+    window.location.href = '/';
+}
